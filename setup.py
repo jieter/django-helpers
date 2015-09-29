@@ -20,7 +20,7 @@ setup(
     url='https://github.com/dyve/django-bootstrap3',
     packages=[],
     include_package_data=True,
-    install_requires=parse_requirements('requirements.txt'),
+    install_requires=map(strf, parse_requirements('requirements.txt')),
     license="MIT",
     zip_safe=False,
     keywords='django helpers',
