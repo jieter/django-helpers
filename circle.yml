@@ -1,7 +1,8 @@
-test:
-    pre:
-        - make requirements
+dependencies:
     override:
-        - make coverage
+        - make requirements
+test:
+    override:
+        - coverage run ./manage.py test
     post:
         - coverage html --directory $CIRCLE_ARTIFACTS
