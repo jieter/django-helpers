@@ -1,7 +1,7 @@
 test:
     pre:
-        - npm install -g eslint
+        - make requirements
     override:
-        - coverage run ./manage.py test
+        - make coverage
     post:
         - coverage html --directory $CIRCLE_ARTIFACTS
