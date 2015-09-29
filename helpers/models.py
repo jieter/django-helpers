@@ -11,6 +11,8 @@ class Timestamped(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ('-created', )
+        get_latest_by = 'created'
 
 
 class AggregationMixin(object):

@@ -4,3 +4,4 @@ django-braces==1.8.1
 isoweek==1.3.0
 python-dateutil==2.4.2
 pytz==2015.6
+reportlab==3.2.0
