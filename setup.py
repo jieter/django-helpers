@@ -5,11 +5,15 @@ import os
 import sys
 
 from pip.req import parse_requirements
+from pip.download import PipSession
 
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
+
+requirements = [str(ir.req) for ir in parse_requirements('requirements.txt', session=PipSession())]
+
 
 setup(
     name='django-helpers',
@@ -20,7 +24,7 @@ setup(
     url='https://github.com/jieter/django-helpers',
     packages=['helpers'],
     include_package_data=True,
-    install_requires=[str(ir.req) for ir in parse_requirements('requirements.txt')],
+    install_requires=requirements,
     license="MIT",
     zip_safe=False,
     keywords='django helpers',
