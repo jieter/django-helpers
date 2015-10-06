@@ -1,6 +1,7 @@
 from django.test import SimpleTestCase
 
 from helpers.containers import TimeseriesContainer
+from helpers.time import local_datetime
 
 
 class TimeseriesContainerTest(SimpleTestCase):
@@ -58,3 +59,30 @@ class TimeseriesContainerTest(SimpleTestCase):
         for i, it in enumerate(TimeseriesContainer(keys, values)):
             self.assertTrue(isinstance(it, dict))
             self.assertItemsEqual(it.keys(), keys)
+
+    def test_sum(self):
+        keys = ('foo',)
+        values = (
+            (1, ),
+            (2, ),
+            (3, ),
+            (4, )
+        )
+        container = TimeseriesContainer(keys, values)
+
+        self.assertEqual(container.sum('foo'), 10)
+
+    def test_to_json(self):
+        keys = ['timestamp', 'foo']
+        values = (
+            (local_datetime(2015, 1, 1, 12, 0, 0), 1),
+            (local_datetime(2015, 1, 2, 12, 0, 0), 2),
+            (local_datetime(2015, 1, 3, 12, 0, 0), 3),
+            (local_datetime(2015, 1, 4, 12, 0, 0), 4)
+        )
+        container = TimeseriesContainer(keys, values)
+
+        data = container.to_json_dict(extra='foo')
+
+        self.assertEquals(data['keys'], keys)
+        self.assertEquals(data['extra'], 'foo')

@@ -50,10 +50,10 @@ class PDF(object):
                 style.borderColor = 'red'
 
     def set_top_margin(self, size):
-        self.top_margin = size * cm
+        self.top_margin = size
 
     def set_left_margin(self, size):
-        self.left_margin = size * cm
+        self.left_margin = size
 
     def wrap_width(self, width=None):
         if width is None:
@@ -90,7 +90,7 @@ class PDF(object):
         if x is None or x == self.left_margin:
             to_wide = sum(colWidths) - (self.width - self.left_margin - self.right_margin)
             if to_wide > 0:
-                print 'Table outside page margins by %0.2fcm' % to_wide
+                print('Table outside page margins by %0.2fcm' % to_wide)
 
         x = (x or self.left_margin) * cm
         y = -(y if y is not None else self.top_margin) * cm

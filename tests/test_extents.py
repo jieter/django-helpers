@@ -29,8 +29,10 @@ class ExtentsTest(SimpleTestCase):
         self.assertRaises(ValueError, lambda: Extents(datetime(2015, 1, 4)))
 
     def test_extents_day(self):
-        extents = Extents(local_datetime(2014, 6, 18, 11, 11, 11), 'day')
+        t = local_datetime(2014, 6, 18, 11, 11, 11)
+        extents = Extents(t, 'day')
 
+        self.assertEqual(t, extents.current())
         self.assert_extents(extents, (2014, 6, 18, 0, 0, 0), (2014, 6, 18, 23, 59, 59))
 
     def test_extents_week(self):
@@ -117,3 +119,10 @@ class ExtentsTest(SimpleTestCase):
         extents = Extents(local_datetime(2014, 6, 18, 11, 11, 11), 'week')
 
         self.assertRaises(ValueError, lambda: extents.slices('year'))
+
+    def test_for_period(self):
+        extents = Extents(local_datetime(2014, 6, 18, 11, 11, 11))
+
+        start, end = extents.for_period('week')
+        self.assertEquals(start, local_datetime(2014, 6, 16, 0, 0, 0))
+        self.assertEquals(end, local_datetime(2014, 6, 22, 23, 59, 59))

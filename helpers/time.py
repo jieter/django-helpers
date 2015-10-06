@@ -4,7 +4,6 @@ from datetime import datetime, timedelta
 import pytz
 from dateutil.relativedelta import relativedelta
 from django.utils.timezone import get_default_timezone, now
-
 from isoweek import Week
 
 local_timezone = get_default_timezone()
@@ -14,8 +13,8 @@ DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 def local_datetime(*args):
     '''Compose a datetime object of the arglist and localize it to the local timezone'''
-    if len(args) == 1:  # datetime is assumed
-        t = args[0]
+    if len(args) == 1:
+        t = args[0] if isinstance(args[0], datetime) else datetime(*args[0])
     else:
         t = datetime(*args)
 
@@ -222,8 +221,12 @@ def quarter(year, q):
     'returns the start and end of a quarter'
     start_months = (1, 4, 7, 10)
     q = int(q)
-    assert q in (1, 2, 3, 4), 'Quarter should be a number from 1 to 4'
+    if q not in (1, 2, 3, 4):
+        raise ValueError('Quarter should be a number from 1 to 4')
 
-    start = datetime(int(year), start_months[q - 1], 1)
+    start = datetime(int(year), start_months[q - 1], 1, 0, 0, 0)
     end = start + relativedelta(months=3) - relativedelta(days=1)
-    return (start, end)
+    return (
+        local_timezone.localize(start),
+        local_timezone.localize(end)
+    )

@@ -2,7 +2,6 @@ from datetime import datetime
 
 from django.test import SimpleTestCase
 from django.utils.timezone import utc
-
 from helpers.time import (date_equals, local_datetime, parse_utc_datetime,
                           quarter, round_to_interval, round_to_minute)
 
@@ -128,8 +127,18 @@ class TimestampRounding(SimpleTestCase):
 
 
 class TestQuarter(SimpleTestCase):
-    def test(self):
-        self.assertEquals(quarter(2014, 1), (datetime(2014, 1, 1), datetime(2014, 3, 31)))
-        self.assertEquals(quarter(2001, 2), (datetime(2001, 4, 1), datetime(2001, 6, 30)))
-        self.assertEquals(quarter(2015, 3), (datetime(2015, 7, 1), datetime(2015, 9, 30)))
-        self.assertEquals(quarter(2016, 4), (datetime(2016, 10, 1), datetime(2016, 12, 31)))
+    def test_invalid(self):
+        self.assertRaises(ValueError, lambda: quarter(2015, 6))
+
+    def test_valid(self):
+        tests = (
+            (quarter(2014, 1), (2014, 1, 1), (2014, 3, 31)),
+            (quarter(2001, 2), (2001, 4, 1), (2001, 6, 30)),
+            (quarter(2015, 3), (2015, 7, 1), (2015, 9, 30)),
+            (quarter(2016, 4), (2016, 10, 1), (2016, 12, 31)),
+        )
+        for actual, start, end in tests:
+            start = local_datetime(start)
+            end = local_datetime(end)
+            self.assertEqual(actual[0], start)
+            self.assertEqual(actual[1], end)
