@@ -96,12 +96,29 @@ def date_equals(a, b):
     return a.date() == b.date()
 
 
+def clean_day(t):
+    '''Set everything less significant than day to 0'''
+    return t.replace(hour=0, minute=0, second=0, microsecond=0)
+
+
+def clean_month(t):
+    '''Set day to 1 and everything less significant to 0'''
+    return clean_day(t).replace(day=1)
+
+
+def clean_year(t):
+    '''Set day and month to 1 and everything less significant to 0'''
+    return clean_month(t).replace(month=1)
+
+
 class Extents(object):
     '''
     Represents the start and end of a period around a point in time t.
 
     Possible periods are: day, week, month, year
     '''
+    VALID_PERIODS = ('year', 'month', 'week', 'day', None)
+
     # Interesting stackoverflow question about timezones, DST etc:
     # http://stackoverflow.com/questions/2532729/daylight-saving-time-and-time-zone-best-practices
     def __init__(self, timestamp=None, period=None):
@@ -126,13 +143,11 @@ class Extents(object):
         self.period = period
 
     def for_period(self, period):
-        '''
-        Return a clone with the period defined
-        '''
+        '''Return a clone with the period defined'''
         return Extents(self.timestamp, period)
 
     def is_valid_period(self, period):
-        return period in ('year', 'month', 'week', 'day', None)
+        return period in self.VALID_PERIODS
 
     def __iter__(self):
         return iter(self.to_tuple())
@@ -177,41 +192,42 @@ class Extents(object):
             yield current
             current += size
 
-    def clean_day(self, t):
-        return t.replace(hour=0, minute=0, second=0, microsecond=0)
-
     def current(self):
         return self.timestamp
 
     def previous(self):
         start, end = self.to_tuple()
-        return self.clean_day(start - (end - start) / 2)
+        return clean_day(start - (end - start) / 2)
 
     def next(self):
         start, end = self.to_tuple()
-        return self.clean_day(end + (end - start) / 2)
+        return clean_day(end + (end - start) / 2)
 
     def day(self):
-        start = self.clean_day(self.timestamp)
+        'Returns the start, end-tuple for a day around self.timestamp'
+        start = clean_day(self.timestamp)
         end = start + timedelta(hours=23, minutes=59, seconds=59)
 
         return (start, end)
 
     def week(self):
+        'Returns the start, end-tuple for a week around self.timestamp'
         w = Week.withdate(self.timestamp)
-        start = self.clean_day(local_timezone.localize(datetime.combine(w.monday(), datetime.min.time())))
+        start = clean_day(local_timezone.localize(datetime.combine(w.monday(), datetime.min.time())))
         end = start + timedelta(days=6, hours=23, minutes=59, seconds=59)
 
         return (start, end)
 
     def month(self):
-        start = self.clean_day(self.timestamp).replace(day=1)
+        'Returns the start, end-tuple for a month around self.timestamp'
+        start = clean_month(self.timestamp)
         end = start + relativedelta(months=1) - timedelta(seconds=1)
 
         return (start, end)
 
     def year(self):
-        start = self.clean_day(self.timestamp).replace(month=1, day=1)
+        'Returns the start, end-tuple for a year around self.timestamp'
+        start = clean_year(self.timestamp)
         end = start.replace(year=start.year + 1) - timedelta(seconds=1)
 
         return (start, end)
