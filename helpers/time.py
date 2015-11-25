@@ -152,6 +152,9 @@ class Extents(object):
     def __iter__(self):
         return iter(self.to_tuple())
 
+    def __getitem__(self, key):
+        return self.to_tuple()[key]
+
     def to_tuple(self):
         if self.period is not None:
             return getattr(self, self.period)()

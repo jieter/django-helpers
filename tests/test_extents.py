@@ -25,6 +25,14 @@ class ExtentsTest(SimpleTestCase):
             expect.__repr__()
         ))
 
+    def test_to_tuple(self):
+        extents = Extents(period='day')
+        extents_tuple = tuple(extents)
+
+        self.assertEquals(extents_tuple, extents.to_tuple())
+        self.assertEquals(extents_tuple[0], extents[0])
+        self.assertEquals(extents_tuple[1], extents[1])
+
     def test_extents_naive(self):
         self.assertRaises(ValueError, lambda: Extents(datetime(2015, 1, 4)))
 
