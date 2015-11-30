@@ -8,5 +8,8 @@ USE_TZ = True
 USE_I18N = True
 USE_L10N = True
 
+INSTALLED_APPS = (
+    'helpers',
+)
 
 TEST_RUNNER = 'rainbowtests.test.runner.RainbowDiscoverRunner'
