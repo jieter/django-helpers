@@ -1,4 +1,3 @@
-from bootstrap3.components import render_icon
 from django import template
 from django.utils.html import format_html
 from django.utils.translation import ugettext as _
@@ -6,6 +5,7 @@ from django.utils.translation import ugettext as _
 register = template.Library()
 
 link_fmt = '<a href="?page={}" class="btn btn-primary">{}</a>'
+
 
 @register.simple_tag
 def paginator(items):
