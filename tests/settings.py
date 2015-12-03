@@ -31,4 +31,11 @@ TEMPLATES = [{
                 'django.contrib.messages.context_processors.messages',
             ],
         },
-    },]
+    },
+]
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3'
+    }
+}
