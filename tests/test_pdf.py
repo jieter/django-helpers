@@ -29,8 +29,8 @@ class MyPDF(PDF):
     def filename(self):
         return self.f
 
-class PdfTest(SimpleTestCase):
 
+class PdfTest(SimpleTestCase):
     def test_pdf(self):
         pdf = PDF()
 

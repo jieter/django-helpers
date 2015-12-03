@@ -16,3 +16,6 @@ coverage: pyclean
 pyclean:
 	find . -name "*.pyc" -exec rm -rf {} \;
 	find . -type d -name "__pycache__" -delete
+
+pip-review:
+	pip freeze --local | cut -d = -f 1 | xargs -n 1 pip search | grep -B2 'LATEST:'
