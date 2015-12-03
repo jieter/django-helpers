@@ -63,7 +63,7 @@ class Statistic(object):
         return mark_safe(html)
 
 
-def postgres_table_size_stats():
+def postgres_table_size_stats():  # pragma: no cover
     if not settings.DATABASES['default']['ENGINE'].endswith('postgresql_psycopg2'):
         return Statistic('DB statistics only available on PostgreSQL')
 

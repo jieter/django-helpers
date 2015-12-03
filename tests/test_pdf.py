@@ -30,6 +30,30 @@ class MyPDF(PDF):
         return self.f
 
 
+class MyWidePDF(MyPDF):
+    def draw_table(self):
+        self.table([
+            ['regel 1', '1'],
+            ['regel 2', '2']
+        ], [20, 20], style=[
+            ('FONT', (0, 0), (-1, -1), self.font),
+            ('FONTSIZE', (0, 0), (-1, -1), 9),
+            ('TEXTCOLOR', (0, 0), (-1, -1), (0.2, 0.2, 0.2)),
+        ])
+
+        self.table([
+            ['regel 1', '1'],
+            ['regel 2', '2'],
+        ], [2, 2], rowHeights=[20, 20])
+
+        self.table([
+            ['regel 1', '1'],
+            ['regel 2', '2'],
+        ], [2, 2], rowHeights=10)
+
+        self.string('The quick brown fox jumped over the lazy dog')
+
+
 class PdfTest(SimpleTestCase):
     def test_pdf(self):
         pdf = PDF()
@@ -59,3 +83,8 @@ class PdfTest(SimpleTestCase):
 
         filepath = os.path.exists(os.path.join('/tmp', pdf.filename()))
         self.assertTrue(filepath)
+
+    def test_width(self):
+        'should print a warning to stdout that the table exceeds the margins'
+        pdf = MyWidePDF()
+        pdf.write_pdf('/tmp')
