@@ -1,3 +1,6 @@
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 DEBUG = True
 
 SECRET_KEY = 'is it secret, is is safe'
@@ -39,3 +42,6 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3'
     }
 }
+LOCALE_PATHS = (
+    os.path.join(os.path.dirname(BASE_DIR), 'helpers', 'locale'),
+)

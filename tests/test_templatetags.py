@@ -41,11 +41,13 @@ class TestPaginatorTag(TestCase):
             'items': paginator.page(1)
         }))
         self.assertTrue('Page 1 of 2' in rendered)
+        self.assertTrue('<a href="?page=2" class="btn btn-primary">Next</a>' in rendered)
 
         rendered = self.template.render(Context({
             'items': paginator.page(2)
         }))
         self.assertTrue('Page 2 of 2' in rendered)
+        self.assertTrue('<a href="?page=1" class="btn btn-primary">Previous</a>' in rendered)
 
     def test_paginator_single_page(self):
         paginator = Paginator(User.objects.all(), 10)

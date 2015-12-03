@@ -13,14 +13,17 @@ def paginator(items):
         return ''
 
     if items.has_previous():
-        prev_link = format_html(link_fmt, items.previous_page_number(), _('Vorige'))
+        prev_link = format_html(link_fmt, items.previous_page_number(), _('Previous'))
     else:
         prev_link = ''
 
-    pages = 'Page {} of {}'.format(items.number, items.paginator.num_pages)
+    pages = _('Page %(page)d of %(page_count)d') % {
+        'page': items.number,
+        'page_count': items.paginator.num_pages
+    }
 
     if items.has_next():
-        next_link = format_html(link_fmt, items.next_page_number(), _('Volgende'))
+        next_link = format_html(link_fmt, items.next_page_number(), _('Next'))
     else:
         next_link = ''
 
