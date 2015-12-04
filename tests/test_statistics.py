@@ -21,6 +21,7 @@ class TestStatistic(SimpleTestCase):
             'Test iterable', datasource,
             keys=['foo', 'bar']
         )
+        stat.render_rows()
 
 
 class TestStatisticQueryset(TestCase):
@@ -30,4 +31,4 @@ class TestStatisticQueryset(TestCase):
 
         stat = Statistic.from_queryset('Number of users', User.objects.all())
 
-        table = stat.render_rows()
+        stat.render_rows()

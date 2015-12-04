@@ -14,7 +14,6 @@ class Obj(object):
 
 
 class JsonResponseTest(SimpleTestCase):
-
     def test_transformation(self):
         dt = parse_utc_datetime('2014-04-16 12:12:12')
         indata = dict(timestamp=dt)
@@ -52,7 +51,6 @@ class JsonResponseTest(SimpleTestCase):
             parse_utc_datetime(response_json[0], JSON_DATETIME_FORMAT).year,
             start.year
         )
-
 
     def test_timeseriescontainer(self):
         keys = ['timestamp', 'foo']

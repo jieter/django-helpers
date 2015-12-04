@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.core.paginator import EmptyPage, Paginator
+from django.core.paginator import Paginator
 from django.template import Context, Template
 from django.test import SimpleTestCase, TestCase
 from django.test.utils import override_settings

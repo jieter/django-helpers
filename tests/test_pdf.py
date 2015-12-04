@@ -7,6 +7,7 @@ from helpers.pdf import PDF
 
 class MyPDF(PDF):
     f = 'mypdf.pdf'
+
     def draw_table(self):
         self.table([
             ['regel 1', '1'],
@@ -66,6 +67,7 @@ class PdfTest(SimpleTestCase):
         pdf = PDF()
 
         response = pdf.http_response()
+        self.assertEqual(response['Content-Type'], 'application/pdf')
 
     def test_simple_doc(self):
         pdf = MyPDF()

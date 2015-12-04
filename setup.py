@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
-import sys
-
 from pip.req import parse_requirements
 from pip.download import PipSession
 

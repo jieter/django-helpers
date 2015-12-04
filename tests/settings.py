@@ -23,7 +23,8 @@ INSTALLED_APPS = (
 
 TEST_RUNNER = 'rainbowtests.test.runner.RainbowDiscoverRunner'
 
-TEMPLATES = [{
+TEMPLATES = [
+    {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'APP_DIRS': True,
         'OPTIONS': {
