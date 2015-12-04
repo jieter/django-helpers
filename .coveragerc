@@ -7,7 +7,9 @@ source =
 omit =
     helpers/settings.py
     manage.py
+    setup.py
     tests/*
+
 
 [report]
 exclude_lines =
