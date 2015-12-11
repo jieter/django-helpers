@@ -2,7 +2,6 @@ from datetime import datetime
 
 from django.test import SimpleTestCase
 from django.utils.timezone import utc
-
 from helpers.time import Extents, local_datetime
 
 

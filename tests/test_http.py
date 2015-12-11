@@ -1,7 +1,6 @@
 import json
 
 from django.test import SimpleTestCase
-
 from helpers.containers import TimeseriesContainer
 from helpers.http import JSON_DATETIME_FORMAT, json_response
 from helpers.time import (Extents, local_datetime, local_timezone,

@@ -1,7 +1,6 @@
 import os
 
 from django.test import SimpleTestCase
-
 from helpers.pdf import PDF
 
 

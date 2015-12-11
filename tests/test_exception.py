@@ -1,5 +1,4 @@
 from django.test import SimpleTestCase
-
 from helpers.exception import exception_message
 
 

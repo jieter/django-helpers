@@ -10,7 +10,7 @@ from .time import Extents
 JSON_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
 
-def handler(obj):
+def json_handler(obj):
     if isinstance(obj, datetime):
         return obj.strftime(JSON_DATETIME_FORMAT)
     elif isinstance(obj, Extents):
@@ -21,7 +21,7 @@ def handler(obj):
         raise TypeError
 
 dumpkwargs = {
-    'default': handler,
+    'default': json_handler,
     'indent': 2 if settings.DEBUG else None,
     'separators': (', ', ': ') if settings.DEBUG else (',', ':'),
 }

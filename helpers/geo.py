@@ -2,7 +2,6 @@ import logging
 
 from django.conf import settings
 from django.db import models
-
 from geopy.geocoders import Nominatim
 
 from .exception import exception_message

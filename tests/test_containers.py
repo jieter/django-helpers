@@ -1,5 +1,4 @@
 from django.test import SimpleTestCase
-
 from helpers.containers import TimeseriesContainer
 from helpers.time import local_datetime
 

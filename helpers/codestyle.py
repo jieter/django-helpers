@@ -1,6 +1,6 @@
 from django.conf import settings
-from flake8.engine import get_style_guide
 from django.test import SimpleTestCase
+from flake8.engine import get_style_guide
 
 
 class CodingStyle(SimpleTestCase):
