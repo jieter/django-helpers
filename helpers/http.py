@@ -4,7 +4,6 @@ from datetime import datetime
 from django.conf import settings
 from django.http import HttpResponse
 
-from .containers import TimeseriesContainer
 from .time import Extents
 
 JSON_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
@@ -15,7 +14,7 @@ def json_handler(obj):
         return obj.strftime(JSON_DATETIME_FORMAT)
     elif isinstance(obj, Extents):
         return list(obj)
-    elif isinstance(obj, TimeseriesContainer):
+    elif hasattr(obj, 'to_json_dict'):
         return obj.to_json_dict()
     else:
         raise TypeError
