@@ -4,20 +4,16 @@ from datetime import datetime
 from django.conf import settings
 from django.http import HttpResponse
 
-from .time import Extents
-
 JSON_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
 
 def json_handler(obj):
     if isinstance(obj, datetime):
         return obj.strftime(JSON_DATETIME_FORMAT)
-    elif isinstance(obj, Extents):
-        return list(obj)
     elif hasattr(obj, 'to_json_dict'):
         return obj.to_json_dict()
     else:
-        raise TypeError
+        return list(obj)
 
 dumpkwargs = {
     'default': json_handler,
