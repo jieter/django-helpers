@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pip.req import parse_requirements
 from pip.download import PipSession
+from pip.req import parse_requirements
 
 try:
     from setuptools import setup
@@ -14,7 +14,7 @@ requirements = [str(ir.req) for ir in parse_requirements('requirements.txt', ses
 
 setup(
     name='django-helpers',
-    version='0.0.3',
+    version='0.0.4',
     description="""Some Django helpers I share between my projects""",
     author='Jan Pieter Waagmeester',
     author_email='jieter@jieter.nl',
