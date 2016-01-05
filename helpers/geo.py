@@ -10,7 +10,7 @@ logger = logging.getLogger('helpers.geo')
 
 
 def geocoder(string):
-    if getattr('TEST_MODE', settings, False):
+    if getattr(settings, 'TEST_MODE', False):
         return None
     try:  # pragma: no cover
         geocoder = Nominatim(country_bias='NL', timeout=0.5)
