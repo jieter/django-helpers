@@ -28,10 +28,12 @@ class GeoLocationMixin(models.Model):
     STATUS_PENDING = 'pending'
     STATUS_ERROR = 'error'
     STATUS_SUCCESS = 'success'
+    STATUS_MANUAL = 'manual'
     GEOCODE_STATUS_CHOICES = (
         (STATUS_PENDING, 'Not yet geocoded'),
         (STATUS_ERROR, 'Geocoder returned error'),
-        (STATUS_SUCCESS, 'Succesfully geocoded')
+        (STATUS_SUCCESS, 'Succesfully geocoded'),
+        (STATUS_MANUAL, 'Manually entered')
     )
     geocode_status = models.CharField(
         max_length=15,
@@ -48,7 +50,7 @@ class GeoLocationMixin(models.Model):
         return str(self)
 
     def is_geocoded(self):
-        return self.geocode_status == self.STATUS_SUCCESS
+        return self.geocode_status in (self.STATUS_SUCCESS, self.STATUS_MANUAL)
 
     def has_location(self):
         if self.is_geocoded():
@@ -58,6 +60,11 @@ class GeoLocationMixin(models.Model):
             self.geocode()
 
         return self.geocode_status == self.STATUS_SUCCESS
+
+    def set_location(self, latlng):
+        self.lat, self.lng = latlng
+        self.geocode_status = self.STATUS_MANUAL
+        self.save()
 
     def get_location(self):
         return (self.lat, self.lng)
