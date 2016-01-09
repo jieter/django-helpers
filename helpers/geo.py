@@ -2,6 +2,7 @@ import logging
 
 from django.conf import settings
 from django.db import models
+
 from geopy.geocoders import Nominatim
 
 from .exception import exception_message
@@ -86,3 +87,10 @@ class GeoLocationMixin(models.Model):
 
         else:
             return self.geocode_status
+
+    def get_wkt(self):
+        if not self.has_location():
+            return None
+
+        # WKT uses lng, lat order
+        return 'POINT (%f %f)' % (self.lng, self.lat)
