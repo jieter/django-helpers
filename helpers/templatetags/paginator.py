@@ -28,7 +28,7 @@ def paginator(items):
         next_link = ''
 
     return format_html(
-        '''<div class="row">
+        '''<div class="row paginator">
             <div class="col-sm-4">{}</div>
             <div class="col-sm-4 text-center">{}</div>
             <div class="col-sm-4 text-right">{}</div>
