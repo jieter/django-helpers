@@ -14,7 +14,7 @@ requirements = [str(ir.req) for ir in parse_requirements('requirements.txt', ses
 
 setup(
     name='django-helpers',
-    version='0.0.9',
+    version='0.0.10',
     description="""Some Django helpers I share between my projects""",
     author='Jan Pieter Waagmeester',
     author_email='jieter@jieter.nl',
