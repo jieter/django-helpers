@@ -1,0 +1,11 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block submit_buttons_bottom %}
+  <footer class="grp-module grp-submit-row grp-fixed-footer">
+    <header style="display:none"><h1>{% trans "submit options"|capfirst context "heading" %}</h1></header>
+    <ul>
+       <li><a href="../" class="grp-button grp-default">{% blocktrans %}Back to list{% endblocktrans %}</a></li>
+    </ul>
+  </footer>
+{% endblock %}
