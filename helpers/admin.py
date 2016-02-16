@@ -4,7 +4,7 @@ class ReadOnlyAdminMixin(object):
 
     def __init__(self, *args, **kwargs):
         super(ReadOnlyAdminMixin, self).__init__(*args, **kwargs)
-        self.readonly_fields = self.model._meta.get_all_field_names()
+        self.readonly_fields = [f.name for f in self.model._meta.get_fields()]
 
     def get_actions(self, request):
         actions = super(ReadOnlyAdminMixin, self).get_actions(request)
