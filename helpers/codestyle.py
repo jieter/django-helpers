@@ -5,7 +5,7 @@ from flake8.engine import get_style_guide
 
 class CodingStyle(SimpleTestCase):
     flake8 = get_style_guide(
-        ignore=('E501', 'F403', 'E128'),
+        ignore=('E501', 'F401', 'F403', 'E128', 'F999'),
         report=None,
         exclude=['*/migrations/*']
     )
