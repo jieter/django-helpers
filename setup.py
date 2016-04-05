@@ -19,7 +19,8 @@ if sys.argv[-1] == 'tag':
     os.system('git push && git push --tags')
     sys.exit()
 
-requirements = [str(ir.req) for ir in parse_requirements('requirements.txt', session=PipSession())]
+requirements_filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'requirements.txt')
+requirements = [str(ir.req) for ir in parse_requirements(requirements_filename, session=PipSession())]
 
 setup(
     name='django-helpers-jieter',
