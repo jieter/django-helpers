@@ -1,6 +1,6 @@
 django-envelope==1.1
 django-braces==1.8.1
 isoweek==1.3.0
-python-dateutil==2.5.0
-pytz==2015.7
+python-dateutil==2.5.2
+pytz==2016.3
 reportlab==3.3.0
