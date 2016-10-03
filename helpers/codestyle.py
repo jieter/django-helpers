@@ -1,6 +1,11 @@
 from django.conf import settings
 from django.test import SimpleTestCase
-from flake8.engine import get_style_guide
+
+try:
+    # flake8 3.0 has a new official public API
+    from flake8.api.legacy import get_style_guide
+except ImportError:
+    from flake8.engine import get_style_guide
 
 
 class CodingStyle(SimpleTestCase):
