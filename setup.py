@@ -10,8 +10,11 @@ from setuptools import setup
 
 from helpers import __version__ as VERSION
 
+package_name = 'django-helpers-jieter'
+
 if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist upload')
+    os.system('python setup.py sdist')
+    os.system('twine upload -r pypi dist/%s-%s.tar.gz' % (package_name, VERSION))
     sys.exit()
 
 if sys.argv[-1] == 'tag':
@@ -23,7 +26,7 @@ requirements_filename = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 requirements = [str(ir.req) for ir in parse_requirements(requirements_filename, session=PipSession())]
 
 setup(
-    name='django-helpers-jieter',
+    name=package_name,
     version=VERSION,
     description="""Some Django helpers I share between my projects""",
     author='Jan Pieter Waagmeester',
