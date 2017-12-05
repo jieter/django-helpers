@@ -7,7 +7,7 @@ def exception_message():
 
     details = dict(
         trace=traceback.format_exc(),
-        message=sys.exc_info()[1].message,
+        message=str(sys.exc_info()[1]),
         filename=os.path.basename(sys.exc_info()[2].tb_frame.f_code.co_filename),
         linenumber=sys.exc_info()[2].tb_lineno
     )

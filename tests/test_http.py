@@ -33,12 +33,12 @@ class JsonResponseTest(SimpleTestCase):
         self.assertRaises(TypeError, json_response, data)
 
     def test_list(self):
-        l = ['foo', 'bar', 1]
-        response = json_response(l)
+        lst = ['foo', 'bar', 1]
+        response = json_response(lst)
 
         response_json = json.loads(response.content)
 
-        self.assertEqual(response_json, l)
+        self.assertEqual(response_json, lst)
 
     def test_extents(self):
         e = Extents(period='year')

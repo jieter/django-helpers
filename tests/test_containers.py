@@ -4,7 +4,6 @@ from helpers.time import local_datetime
 
 
 class TimeseriesContainerTest(SimpleTestCase):
-
     def test_simple(self):
         keys = ('foo', 'bar')
 
@@ -39,7 +38,7 @@ class TimeseriesContainerTest(SimpleTestCase):
         d = TimeseriesContainer(keys, [])
 
         self.assertEquals(len(d), 0)
-        self.assertItemsEqual(d.keys, keys)
+        self.assertEquals(d.keys, keys)
 
     def test_indexError(self):
         d = TimeseriesContainer(['foo'], [])
@@ -57,7 +56,7 @@ class TimeseriesContainerTest(SimpleTestCase):
 
         for i, it in enumerate(TimeseriesContainer(keys, values)):
             self.assertTrue(isinstance(it, dict))
-            self.assertItemsEqual(it.keys(), keys)
+            self.assertEquals(tuple(it.keys()), keys)
 
     def test_sum(self):
         keys = ('foo',)

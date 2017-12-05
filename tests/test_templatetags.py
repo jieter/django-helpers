@@ -35,7 +35,7 @@ class TestPaginatorTag(TestCase):
                 username='test%d' % i
             )
 
-        paginator = Paginator(User.objects.all(), 10)
+        paginator = Paginator(User.objects.all().order_by('last_name'), 10)
 
         rendered = self.template.render(Context({
             'items': paginator.page(1)
@@ -50,7 +50,7 @@ class TestPaginatorTag(TestCase):
         self.assertTrue('<a href="?page=1" class="btn btn-primary">Previous</a>' in rendered)
 
     def test_paginator_single_page(self):
-        paginator = Paginator(User.objects.all(), 10)
+        paginator = Paginator(User.objects.all().order_by('last_name'), 10)
 
         rendered = self.template.render(Context({
             'items': paginator.page(1)

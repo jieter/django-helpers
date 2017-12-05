@@ -15,7 +15,7 @@ styles = getSampleStyleSheet()
 
 
 def cm_to_units(l):
-    return map(lambda x: x * cm, l)
+    return list(map(lambda x: x * cm, l))
 
 
 class PDF(object):
@@ -156,7 +156,7 @@ class PDF(object):
 
     def write_pdf(self, path):
         filename = path + '/' + self.filename()
-        with file(filename, 'wb') as pdf:
+        with open(filename, 'wb') as pdf:
             self.write_to(pdf)
 
         return filename

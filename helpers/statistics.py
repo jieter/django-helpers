@@ -89,7 +89,8 @@ def postgres_table_size_stats():  # pragma: no cover
     cursor = connection.cursor()
     cursor.execute(query)
 
-    return Statistic.from_iterable('PostgreSQL table size',
+    return Statistic.from_iterable(
+        'PostgreSQL table size',
         cursor,
         keys=('table', 'data', 'indexes', 'total')
     )

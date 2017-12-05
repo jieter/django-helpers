@@ -5,10 +5,7 @@ from django.conf import settings
 from django.http import HttpResponse
 
 JSON_DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
-try:
-    DEBUG = settings.DEBUG
-except:
-    DEBUG = True
+DEBUG = getattr(settings, 'DEBUG', True)
 
 
 def json_handler(obj):
