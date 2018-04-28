@@ -12,14 +12,14 @@ class ExtentsTest(SimpleTestCase):
         actual_start, actual_end = extents
 
         expect = local_datetime(*start)
-        self.assertEquals(actual_start, expect, message % (
+        self.assertEqual(actual_start, expect, message % (
             'start',
             actual_start.__repr__(),
             expect.__repr__()
         ))
 
         expect = local_datetime(*end)
-        self.assertEquals(actual_end, expect, message % (
+        self.assertEqual(actual_end, expect, message % (
             'end',
             actual_end.__repr__(),
             expect.__repr__()
@@ -29,9 +29,9 @@ class ExtentsTest(SimpleTestCase):
         extents = Extents(period='day')
         extents_tuple = tuple(extents)
 
-        self.assertEquals(extents_tuple, extents.to_tuple())
-        self.assertEquals(extents_tuple[0], extents[0])
-        self.assertEquals(extents_tuple[1], extents[1])
+        self.assertEqual(extents_tuple, extents.to_tuple())
+        self.assertEqual(extents_tuple[0], extents[0])
+        self.assertEqual(extents_tuple[1], extents[1])
 
     def test_extents_naive(self):
         self.assertRaises(ValueError, lambda: Extents(datetime(2015, 1, 4)))
@@ -87,41 +87,41 @@ class ExtentsTest(SimpleTestCase):
         t = datetime(2014, 6, 18, 11, 11, 11, tzinfo=utc)
         extents = Extents(t, period='week')
 
-        self.assertEquals(extents.previous(), local_datetime(2014, 6, 12))
+        self.assertEqual(extents.previous(), local_datetime(2014, 6, 12))
 
     def test_period_next(self):
         extents = Extents(local_datetime(2014, 6, 18, 11, 11, 11), period='week')
 
-        self.assertEquals(extents.next(), local_datetime(2014, 6, 26,))
+        self.assertEqual(extents.next(), local_datetime(2014, 6, 26,))
 
         extents = Extents(local_datetime(2014, 6, 25, 11, 11), period='week')
-        self.assertEquals(extents.next(), local_datetime(2014, 7, 3))
+        self.assertEqual(extents.next(), local_datetime(2014, 7, 3))
 
         extents = Extents(local_datetime(2015, 4, 14, 11, 11), period='week')
-        self.assertEquals(extents.next(), local_datetime(2015, 4, 23))
+        self.assertEqual(extents.next(), local_datetime(2015, 4, 23))
 
     def test_extents_to_string(self):
         t = local_datetime(2014, 6, 18, 11, 11, 11)
         t_formatted = t.__repr__()
 
         extents = Extents(t)
-        self.assertEquals(str(extents), 'Extents for undefined period around %s' % t_formatted)
+        self.assertEqual(str(extents), 'Extents for undefined period around %s' % t_formatted)
 
         extents.set_period('week')
-        self.assertEquals(str(extents), 'Extents for `week` around %s' % t_formatted)
+        self.assertEqual(str(extents), 'Extents for `week` around %s' % t_formatted)
 
     def test_slices_in_day(self):
         extents = Extents(local_datetime(2014, 6, 18, 11, 11, 11), 'day')
 
-        self.assertEquals(extents.slices('hour'), 24)
-        self.assertEquals(extents.slices('15minute'), 24 * 4)
+        self.assertEqual(extents.slices('hour'), 24)
+        self.assertEqual(extents.slices('15minute'), 24 * 4)
 
     def test_slices_in_week(self):
         extents = Extents(local_datetime(2014, 6, 18, 11, 11, 11), 'week')
 
-        self.assertEquals(extents.slices('day'), 7)
-        self.assertEquals(extents.slices('hour'), 7 * 24)
-        self.assertEquals(extents.slices('15minute'), 7 * 24 * 4)
+        self.assertEqual(extents.slices('day'), 7)
+        self.assertEqual(extents.slices('hour'), 7 * 24)
+        self.assertEqual(extents.slices('15minute'), 7 * 24 * 4)
 
     def test_slices_illigal_interval(self):
         extents = Extents(local_datetime(2014, 6, 18, 11, 11, 11), 'week')
@@ -132,5 +132,5 @@ class ExtentsTest(SimpleTestCase):
         extents = Extents(local_datetime(2014, 6, 18, 11, 11, 11))
 
         start, end = extents.for_period('week')
-        self.assertEquals(start, local_datetime(2014, 6, 16, 0, 0, 0))
-        self.assertEquals(end, local_datetime(2014, 6, 22, 23, 59, 59))
+        self.assertEqual(start, local_datetime(2014, 6, 16, 0, 0, 0))
+        self.assertEqual(end, local_datetime(2014, 6, 22, 23, 59, 59))

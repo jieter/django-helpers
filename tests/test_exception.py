@@ -17,10 +17,10 @@ class ExceptionTest(SimpleTestCase):
             message = exception_message()
 
         # should contain current file:
-        self.assertTrue('test_exception.py' in message)
+        self.assertIn('test_exception.py', message)
 
         # should contain the message:
-        self.assertTrue(the_message in message)
+        self.assertIn(the_message, message)
 
         # should contain the line raising the Exception
-        self.assertTrue('raise TestException(the_message)' in message)
+        self.assertIn('raise TestException(the_message)', message)

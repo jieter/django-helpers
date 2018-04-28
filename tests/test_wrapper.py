@@ -23,14 +23,14 @@ class TestWrapper(SimpleTestCase):
     def test_wrapper_get(self):
         wrapped = Wrapped(Klass(TEST_OBJ))
 
-        self.assertEquals(wrapped.get_bar(), TEST_OBJ)
+        self.assertEqual(wrapped.get_bar(), TEST_OBJ)
 
     def test_wrapper_set(self):
         wrapped = Wrapped(Klass({}))
 
-        self.assertNotEquals(wrapped.get_bar(), TEST_OBJ)
-        self.assertEquals(wrapped.get_bar(), {})
+        self.assertNotEqual(wrapped.get_bar(), TEST_OBJ)
+        self.assertEqual(wrapped.get_bar(), {})
 
         wrapped.bar = TEST_OBJ
 
-        self.assertEquals(wrapped.get_bar(), TEST_OBJ)
+        self.assertEqual(wrapped.get_bar(), TEST_OBJ)

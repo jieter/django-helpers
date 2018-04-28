@@ -32,19 +32,19 @@
 #
 #     def test_5hour(self):
 #         values = self.group_by_interval('5hour')
-#         self.assertEquals(len(values), 1)
+#         self.assertEqual(len(values), 1)
 #
 #     def test_hour(self):
 #         values = self.group_by_interval('hour')
-#         self.assertEquals(len(values), 1)
+#         self.assertEqual(len(values), 1)
 #
 #     def test_minute(self):
 #         values = self.group_by_interval('minute')
-#         self.assertEquals(len(values), 5)
+#         self.assertEqual(len(values), 5)
 #
 #     def test_5minute(self):
 #         values = self.group_by_interval('5minute')
-#         self.assertEquals(len(values), 4)
+#         self.assertEqual(len(values), 4)
 #
 #     # def test_key_order_is_preserved(self):
 #     # TODO: implement test
@@ -62,7 +62,7 @@
 #         self.assertRaises(ValueError, lambda: _group_by_multiple(l, 5, 'minute', ('foo', )))
 #
 #     def test_empty(self):
-#         self.assertEquals(_group_by_multiple([], 5, 'minute'), [])
+#         self.assertEqual(_group_by_multiple([], 5, 'minute'), [])
 #
 #     def test_summing(self):
 #         l = [
@@ -76,7 +76,7 @@
 #
 #         ret = _group_by_multiple(l, 5, 'minute')
 #
-#         self.assertEquals(ret, [
+#         self.assertEqual(ret, [
 #             (datetime(2015, 1, 16, 16, 15, 0), 48),
 #             (datetime(2015, 1, 16, 16, 20, 0), 12),
 #         ])
@@ -92,7 +92,7 @@
 #         ]
 #
 #         ret = _group_by_multiple(l, 5, 'minute', aggregates=('avg', ))
-#         self.assertEquals(ret, [
+#         self.assertEqual(ret, [
 #             (datetime(2015, 1, 16, 16, 15, 0), 3.75),
 #             (datetime(2015, 1, 16, 16, 20, 0), 12.0),
 #         ])
@@ -107,7 +107,7 @@
 #             (datetime(2015, 1, 16, 16, 21, 14), 12, 1, 2),
 #         ]
 #         ret = _group_by_multiple(l, 5, 'minute', aggregates=('avg', 'max', 'sum'))
-#         self.assertEquals(ret, [
+#         self.assertEqual(ret, [
 #             (datetime(2015, 1, 16, 16, 15, 0), 3.75, 234, 4),
 #             (datetime(2015, 1, 16, 16, 20, 0), 12.0, 1, 2),
 #         ])

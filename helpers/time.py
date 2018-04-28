@@ -50,7 +50,7 @@ def round_to_minute(t, minute=1):
 
 
 def parse_interval(interval):
-    match = re.match('(\d+)([A-Za-z]+)', interval)
+    match = re.match('(\\d+)([A-Za-z]+)', interval)
 
     if match:
         return int(match.group(1)), match.group(2)

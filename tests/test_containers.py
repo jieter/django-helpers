@@ -15,13 +15,13 @@ class TimeseriesContainerTest(SimpleTestCase):
 
         d = TimeseriesContainer(keys, values)
 
-        self.assertEquals(d[0], dict(foo=1, bar=2.4440404))
-        self.assertEquals(d[1], dict(foo=2, bar=4.4))
+        self.assertEqual(d[0], dict(foo=1, bar=2.4440404))
+        self.assertEqual(d[1], dict(foo=2, bar=4.4))
 
         d.prepare_for_view()
 
-        self.assertEquals(d[0], dict(foo=1, bar=2.44))
-        self.assertEquals(d[1], dict(foo=2, bar=4.4))
+        self.assertEqual(d[0], dict(foo=1, bar=2.44))
+        self.assertEqual(d[1], dict(foo=2, bar=4.4))
 
     def test_invalid(self):
         '''not the right number of keys.'''
@@ -38,8 +38,8 @@ class TimeseriesContainerTest(SimpleTestCase):
 
         d = TimeseriesContainer(keys, [])
 
-        self.assertEquals(len(d), 0)
-        self.assertEquals(d.keys, keys)
+        self.assertEqual(len(d), 0)
+        self.assertEqual(d.keys, keys)
 
     def test_indexError(self):
         d = TimeseriesContainer(['foo'], [])
@@ -53,11 +53,11 @@ class TimeseriesContainerTest(SimpleTestCase):
             (3, 6, 12),
             (4, 8, 16)
         )
-        self.assertEquals(len(values), 4)
+        self.assertEqual(len(values), 4)
 
         for i, it in enumerate(TimeseriesContainer(keys, values)):
             self.assertTrue(isinstance(it, dict))
-            self.assertEquals(set(it.keys()), set(keys))
+            self.assertEqual(set(it.keys()), set(keys))
 
     def test_sum(self):
         keys = ('foo',)
@@ -83,5 +83,5 @@ class TimeseriesContainerTest(SimpleTestCase):
 
         data = container.to_json_dict(extra='foo')
 
-        self.assertEquals(data['keys'], keys)
-        self.assertEquals(data['extra'], 'foo')
+        self.assertEqual(data['keys'], keys)
+        self.assertEqual(data['extra'], 'foo')

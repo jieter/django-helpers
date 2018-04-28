@@ -21,7 +21,7 @@ class JsonResponseTest(SimpleTestCase):
         response = json_response(indata)
         outdata = json.loads(response.content)
 
-        self.assertEquals(
+        self.assertEqual(
             parse_utc_datetime(outdata['timestamp'], JSON_DATETIME_FORMAT),
             indata['timestamp'].astimezone(local_timezone)
         )
@@ -47,7 +47,7 @@ class JsonResponseTest(SimpleTestCase):
         response_json = json.loads(response.content)
 
         start, end = e
-        self.assertEquals(
+        self.assertEqual(
             parse_utc_datetime(response_json[0], JSON_DATETIME_FORMAT).year,
             start.year
         )
@@ -66,4 +66,4 @@ class JsonResponseTest(SimpleTestCase):
         # is valid json
         response_json = json.loads(response.content)
 
-        self.assertEquals(response_json['keys'], keys)
+        self.assertEqual(response_json['keys'], keys)

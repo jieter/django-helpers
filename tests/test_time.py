@@ -11,15 +11,15 @@ class TestLocalDatetime(SimpleTestCase):
     # Europe/Amsterdam is assumed
     def test_utc_vs_amsterdam(self):
         t = datetime(2015, 6, 18, 12, 0, 0, tzinfo=utc)
-        self.assertEquals(t, local_datetime(2015, 6, 18, 14, 0, 0))
+        self.assertEqual(t, local_datetime(2015, 6, 18, 14, 0, 0))
 
     def test_amsterdam_vs_utc(self):
         t = local_datetime(2015, 6, 18, 14, 0, 0)
-        self.assertEquals(t, datetime(2015, 6, 18, 12, 0, 0, tzinfo=utc))
+        self.assertEqual(t, datetime(2015, 6, 18, 12, 0, 0, tzinfo=utc))
 
     def test_without_DST(self):
         t = datetime(2015, 1, 18, 12, 0, 0, tzinfo=utc)
-        self.assertEquals(t, local_datetime(2015, 1, 18, 13, 0, 0))
+        self.assertEqual(t, local_datetime(2015, 1, 18, 13, 0, 0))
 
 
 class test_dateEquals(SimpleTestCase):
