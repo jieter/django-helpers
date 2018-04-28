@@ -1,16 +1,16 @@
 version: 2
 jobs:
-    build:
-        working_directory: ~/circleci-demo-python-django
-        docker:
-            - image: circleci/python:3.6.1
-
-dependencies:
-    override:
-        - make requirements
-
-test:
-    override:
-        - coverage run ./manage.py test
-    post:
-        - coverage html --directory $CIRCLE_ARTIFACTS
+  build:
+    working_directory: ~/python
+    docker:
+       - image: circleci/python:3.6.1
+    steps:
+       - checkout
+       - run: sudo chown -R circleci:circleci /usr/local/bin
+       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+       - run: sudo pip install pipenv
+       - run: pipenv install
+       - run: pipenv run "make requirements"
+       - run: pipenv run "coverage run ./manage.py test"
+       - run: pipenv run "flake8 --ignore E501"
+       - run: pipenv run "coverage html --directory $CIRCLE_ARTIFACTS"

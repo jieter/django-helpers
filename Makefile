@@ -4,7 +4,6 @@ test:
 	./manage.py test tests
 
 requirements:
-	pip install -r requirements.txt
 	pip install -r development.txt
 
 coverage: pyclean

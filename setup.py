@@ -4,8 +4,6 @@
 import os
 import sys
 
-from pip.download import PipSession
-from pip.req import parse_requirements
 from setuptools import setup
 
 from helpers import __version__ as VERSION
@@ -22,9 +20,6 @@ if sys.argv[-1] == 'tag':
     os.system('git push && git push --tags')
     sys.exit()
 
-requirements_filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'requirements.txt')
-requirements = [str(ir.req) for ir in parse_requirements(requirements_filename, session=PipSession())]
-
 setup(
     name=package_name,
     version=VERSION,
@@ -34,8 +29,14 @@ setup(
     url='https://github.com/jieter/django-helpers',
     packages=['helpers'],
     include_package_data=True,
-    install_requires=requirements,
-    license="MIT",
+    install_requires=[
+        'django-braces',
+        'django-envelope',
+        'isoweek',
+        'python-dateutil',
+        'pytz'
+    ],
+    license='MIT',
     zip_safe=False,
     keywords='django helpers',
     classifiers=[
