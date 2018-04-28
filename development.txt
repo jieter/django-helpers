@@ -1,6 +1,6 @@
-Django==2.0
 flake8==3.5.0
 pep8==1.7.1
 django-rainbowtests==0.6.0
-coverage==4.4.2
+coverage==4.5.1
+pur==4.0.3
 -r requirements.txt

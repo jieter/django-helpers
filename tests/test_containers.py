@@ -1,4 +1,5 @@
 from django.test import SimpleTestCase
+
 from helpers.containers import TimeseriesContainer
 from helpers.time import local_datetime
 
@@ -56,7 +57,7 @@ class TimeseriesContainerTest(SimpleTestCase):
 
         for i, it in enumerate(TimeseriesContainer(keys, values)):
             self.assertTrue(isinstance(it, dict))
-            self.assertEquals(tuple(it.keys()), keys)
+            self.assertEquals(set(it.keys()), set(keys))
 
     def test_sum(self):
         keys = ('foo',)

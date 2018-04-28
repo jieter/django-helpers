@@ -1,7 +1,6 @@
+from braces.views import FormMessagesMixin
 from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
-
-from braces.views import FormMessagesMixin
 from envelope.views import ContactView
 
 

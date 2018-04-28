@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.test import SimpleTestCase
 from django.utils.timezone import utc
+
 from helpers.time import (date_equals, local_datetime, parse_utc_datetime,
                           quarter, round_to_interval, round_to_minute)
 

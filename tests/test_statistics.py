@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.test import SimpleTestCase, TestCase
+
 from helpers.statistics import Statistic
 
 
