@@ -1,6 +1,8 @@
 from collections import defaultdict
 
-from django.db import connection, models
+from django.db import models
+from django.db.models.functions import (TruncDay, TruncHour, TruncMinute,
+                                        TruncMonth, TruncYear)
 
 from .time import is_interval_valid, parse_interval, round_to_interval
 
@@ -34,10 +36,17 @@ def group_by_interval(queryset, interval, aggregates, field_name='timestamp'):
     # https://bitbucket.org/kmike/django-qsstats-magic
     num, interval = parse_interval(interval)
 
-    if interval not in ('minute', 'hour', 'day', 'month', 'year'):
+    truncates = {
+        'minute': TruncMinute,
+        'hour': TruncHour,
+        'day': TruncDay,
+        'month': TruncMonth,
+        'year': TruncYear,
+    }
+    if interval not in truncates.keys():
         raise ValueError('Interval (%s) not supported by date_trunc()' % interval)
 
-    label = prefix(field_name)
+    aggregator = truncates[interval](field_name)
 
     lookup = {
         'max': models.Max,
@@ -48,15 +57,12 @@ def group_by_interval(queryset, interval, aggregates, field_name='timestamp'):
     }
     aggregates_dict = {prefix(key): lookup[function](key) for key, function in aggregates}
 
-    # this is not really a public API but much more portable than using
-    # raw date_trunc in extra().
-    aggregator = connection.ops.date_trunc_sql(interval, field_name)
-
-    prefixed_keys = [label, ] + map(prefix, [a[0] for a in aggregates])
+    label = prefix(field_name)
+    prefixed_keys = [label, ] + [prefix(a[0]) for a in aggregates]
 
     # explicit order_by() call required to cancel effect of default ordering on models
     values = queryset \
-        .extra({label: aggregator}) \
+        .annotate(**{label: aggregator}) \
         .values(label) \
         .order_by() \
         .annotate(**aggregates_dict) \
