@@ -1,7 +1,7 @@
 import copy
 from email.mime.application import MIMEApplication
 
-from django.utils.six import StringIO
+from io import StringIO
 
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
